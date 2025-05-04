@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNotes - Network Access Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #4a6fa5;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .note {
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tip {
+            background-color: #ddffdd;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #3a5a8c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QuickNotes - Network Access Guide</h1>
+        
+        <div class="note">
+            <p><strong>Note:</strong> This guide explains how to access your QuickNotes app from other devices on your local network using your computer's IP address instead of localhost.</p>
+        </div>
+        
+        <h2>Why Use a Local Network IP?</h2>
+        
+        <p>Using your local network IP address instead of localhost offers several advantages:</p>
+        
+        <ul>
+            <li><strong>Access from other devices</strong> - Test your app on phones, tablets, or other computers on the same network</li>
+            <li><strong>Share with others</strong> - Let others on your network try your app without deploying it</li>
+            <li><strong>Bypass localhost issues</strong> - Solve connection problems related to localhost resolution</li>
+            <li><strong>Test responsive design</strong> - See how your app looks on real devices</li>
+        </ul>
+        
+        <h2>Finding Your Local IP Address</h2>
+        
+        <h3>On macOS/Linux:</h3>
+        <pre>ifconfig | grep "inet " | grep -v 127.0.0.1</pre>
+        
+        <h3>On Windows:</h3>
+        <pre>ipconfig</pre>
+        <p>Look for the "IPv4 Address" under your active network adapter (usually Wi-Fi or Ethernet).</p>
+        
+        <div class="tip">
+            <p><strong>Tip:</strong> Your local IP typically starts with 192.168.x.x, 10.x.x.x, or 172.16.x.x</p>
+        </div>
+        
+        <h2>Running the Server</h2>
+        
+        <p>The QuickNotes app includes a special server that binds to all network interfaces:</p>
+        
+        <pre>node network-server.js</pre>
+        
+        <p>This server will output all available IP addresses you can use to access the app:</p>
+        
+        <pre>
+Server running at http://0.0.0.0:3000/
+You can access the app using any of these URLs:
+- http://localhost:3000/
+- http://192.168.1.100:3000/  (your IP will be different)
+
+Share any of the IP-based URLs to access from other devices on the same network</pre>
+        
+        <h2>Accessing from Other Devices</h2>
+        
+        <ol>
+            <li>Make sure the other device is connected to the same Wi-Fi network as your computer</li>
+            <li>Open a web browser on the other device</li>
+            <li>Enter the URL with your computer's IP address (e.g., <code>http://192.168.1.100:3000</code>)</li>
+        </ol>
+        
+        <h2>Troubleshooting Network Access</h2>
+        
+        <h3>1. Firewall Settings</h3>
+        <p>If other devices can't connect to your server, check your firewall settings:</p>
+        <ul>
+            <li>Make sure your firewall allows incoming connections on port 3000</li>
+            <li>Temporarily disable your firewall to test if that's the issue</li>
+        </ul>
+        
+        <h3>2. Network Configuration</h3>
+        <p>Some networks restrict device-to-device communication:</p>
+        <ul>
+            <li>Public Wi-Fi networks often block connections between devices</li>
+            <li>Some routers have "AP isolation" or "client isolation" enabled</li>
+            <li>Try using your home network instead of public Wi-Fi</li>
+        </ul>
+        
+        <h3>3. Correct IP Address</h3>
+        <p>Make sure you're using the correct IP address:</p>
+        <ul>
+            <li>Your IP address might change when you reconnect to the network</li>
+            <li>If you have multiple network adapters, use the IP of the one connected to your network</li>
+        </ul>
+        
+        <h2>For Developers: How It Works</h2>
+        
+        <p>The key to making your server accessible on the network is binding to <code>0.0.0.0</code> instead of <code>localhost</code> or <code>127.0.0.1</code>:</p>
+        
+        <pre>
+// For Node.js HTTP server
+server.listen(3000, '0.0.0.0', () => {
+  console.log('Server running on all network interfaces');
+});
+
+// For Express.js
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Express server running on all network interfaces');
+});</pre>
+        
+        <p>This tells the server to listen on all available network interfaces, not just the loopback interface.</p>
+        
+        <div class="note">
+            <p><strong>Security Note:</strong> When binding to all interfaces, your server becomes accessible to all devices on your local network. Only do this in development environments, not in production.</p>
+        </div>
+        
+        <p>Ready to try accessing QuickNotes from other devices? Start the network server and use your local IP address!</p>
+        
+        <a href="index.html" class="btn">Back to QuickNotes</a>
+    </div>
+</body>
+</html>

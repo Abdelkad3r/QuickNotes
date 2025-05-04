@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands for QuickNotes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+        }
+        .step {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .command {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+        .note {
+            background-color: #ffe6cc;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Git Commands for QuickNotes</h1>
+    
+    <p>This page provides the Git commands you need to run to push your QuickNotes project to GitHub. You can copy each command and paste it into your terminal.</p>
+    
+    <div class="note">
+        <strong>Note:</strong> Make sure you're in the QuickNotes directory before running these commands.
+    </div>
+    
+    <div class="step">
+        <h2>Step 1: Navigate to the QuickNotes Directory</h2>
+        <p>First, make sure you're in the QuickNotes directory:</p>
+        <div class="command">
+            cd MiniJobb/QuickNotes
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 2: Initialize Git</h2>
+        <p>Initialize a new Git repository in this directory:</p>
+        <div class="command">
+            git init
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>Expected output: <code>Initialized empty Git repository in .../MiniJobb/QuickNotes/.git/</code></p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 3: Add Your Files</h2>
+        <p>Add all the files in the directory to Git:</p>
+        <div class="command">
+            git add .
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>This command doesn't produce any output if successful.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 4: Configure Git User (if needed)</h2>
+        <p>If this is your first time using Git, you may need to configure your user name and email:</p>
+        <div class="command">
+            git config user.name "Your Name"
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <div class="command">
+            git config user.email "your.email@example.com"
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>Replace "Your Name" and "your.email@example.com" with your actual name and email.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 5: Commit Your Files</h2>
+        <p>Create your first commit:</p>
+        <div class="command">
+            git commit -m "Initial commit of QuickNotes project"
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>You should see output indicating the files that were committed.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 6: Add the Remote Repository</h2>
+        <p>Connect your local repository to the GitHub repository:</p>
+        <div class="command">
+            git remote add origin https://github.com/Abdelkad3r/QuickNotes.git
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>This command doesn't produce any output if successful.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 7: Set Your Branch Name to "main"</h2>
+        <p>Rename your branch to "main":</p>
+        <div class="command">
+            git branch -M main
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>This command doesn't produce any output if successful.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 8: Push Your Code to GitHub</h2>
+        <p>Finally, push your code to GitHub:</p>
+        <div class="command">
+            git push -u origin main
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>You'll be prompted for your GitHub username and password/token.</p>
+        <div class="note">
+            <strong>Important:</strong> If you have two-factor authentication enabled on GitHub, you'll need to use a personal access token instead of your password. You can create one at <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings > Developer settings > Personal access tokens</a>.
+        </div>
+    </div>
+    
+    <div class="success">
+        <h2>Success!</h2>
+        <p>If all commands run successfully, your QuickNotes project is now available at:</p>
+        <p><a href="https://github.com/Abdelkad3r/QuickNotes" target="_blank">https://github.com/Abdelkad3r/QuickNotes</a></p>
+    </div>
+    
+    <div class="error">
+        <h2>Troubleshooting</h2>
+        
+        <h3>"fatal: remote origin already exists"</h3>
+        <p>If you get this error, run:</p>
+        <div class="command">
+            git remote remove origin
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>Then try adding the remote again (Step 6).</p>
+        
+        <h3>"error: failed to push some refs"</h3>
+        <p>If you get this error, run:</p>
+        <div class="command">
+            git pull origin main --allow-unrelated-histories
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>Then try pushing again (Step 8).</p>
+        
+        <h3>"Authentication failed"</h3>
+        <p>Make sure you're using the correct username. If you have two-factor authentication enabled, use a personal access token instead of your password.</p>
+    </div>
+    
+    <script>
+        function copyToClipboard(button) {
+            const commandDiv = button.parentElement;
+            const commandText = commandDiv.textContent.trim();
+            
+            navigator.clipboard.writeText(commandText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = "Copied!";
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

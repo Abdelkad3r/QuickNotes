@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNotes - ngrok Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #4a6fa5;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .note {
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tip {
+            background-color: #ddffdd;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #3a5a8c;
+        }
+        
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Running QuickNotes with ngrok</h1>
+        
+        <div class="note">
+            <p><strong>Note:</strong> This guide will help you expose your locally running QuickNotes app to the internet using ngrok, making it accessible from anywhere in the world.</p>
+        </div>
+        
+        <h2>What is ngrok?</h2>
+        
+        <p>ngrok is a powerful tool that creates a secure tunnel to expose a local web server to the internet. It gives you a public URL that anyone can access, even if they're not on your local network.</p>
+        
+        <div class="image-container">
+            <img src="https://ngrok.com/static/img/demo.png" alt="ngrok demo">
+            <div class="caption">ngrok creates a tunnel from the public internet to your local machine</div>
+        </div>
+        
+        <h2>Why Use ngrok with QuickNotes?</h2>
+        
+        <ul>
+            <li><strong>Share with anyone</strong> - Let friends and family try your QuickNotes app from anywhere</li>
+            <li><strong>Test on any device</strong> - Access your app from any device with internet access</li>
+            <li><strong>No deployment needed</strong> - Show off your project without hosting it on a server</li>
+            <li><strong>Bypass network restrictions</strong> - Works even if your local network has limitations</li>
+        </ul>
+        
+        <h2>Step 1: Install ngrok</h2>
+        
+        <h3>macOS (using Homebrew)</h3>
+        <pre>brew install ngrok</pre>
+        
+        <h3>macOS/Linux (manual installation)</h3>
+        <pre>
+# Download the zip file
+curl -O https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-darwin-amd64.zip
+
+# Unzip the file
+unzip ngrok-v3-stable-darwin-amd64.zip
+
+# Move to a location in your PATH (optional)
+sudo mv ngrok /usr/local/bin</pre>
+        
+        <h3>Windows</h3>
+        <ol>
+            <li>Download ngrok from <a href="https://ngrok.com/download" target="_blank">https://ngrok.com/download</a></li>
+            <li>Extract the zip file</li>
+            <li>Optionally add the ngrok.exe location to your PATH</li>
+        </ol>
+        
+        <h2>Step 2: Sign up for ngrok</h2>
+        
+        <ol>
+            <li>Go to <a href="https://ngrok.com/" target="_blank">https://ngrok.com/</a> and sign up for a free account</li>
+            <li>After signing up, you'll get an authtoken</li>
+            <li>Configure ngrok with your authtoken:
+                <pre>ngrok config add-authtoken YOUR_AUTH_TOKEN</pre>
+            </li>
+        </ol>
+        
+        <div class="tip">
+            <p><strong>Tip:</strong> The authtoken is required to use ngrok. Without it, your sessions will expire after a short time.</p>
+        </div>
+        
+        <h2>Step 3: Start the QuickNotes server</h2>
+        
+        <p>Make sure your QuickNotes server is running on port 3000:</p>
+        
+        <pre>
+cd MiniJobb/QuickNotes
+node network-server.js</pre>
+        
+        <p>You should see output indicating that the server is running at <code>http://localhost:3000</code>.</p>
+        
+        <h2>Step 4: Start ngrok</h2>
+        
+        <p>In a new terminal window, run:</p>
+        
+        <pre>ngrok http 3000</pre>
+        
+        <p>You should see output similar to this:</p>
+        
+        <pre>
+Session Status                online
+Account                       Your Name (Plan: Free)
+Version                       3.3.1
+Region                        United States (us)
+Latency                       24ms
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    https://abcd-123-456-789-10.ngrok.io -> http://localhost:3000</pre>
+        
+        <div class="image-container">
+            <img src="https://ngrok.com/static/img/ngrok_terminal.png" alt="ngrok terminal output">
+            <div class="caption">Example of ngrok terminal output</div>
+        </div>
+        
+        <h2>Step 5: Access your app</h2>
+        
+        <p>The forwarding URL (https://abcd-123-456-789-10.ngrok.io in the example above) is your public URL. Anyone can access your QuickNotes app using this URL, from anywhere in the world!</p>
+        
+        <div class="tip">
+            <p><strong>Tip:</strong> Share this URL with friends or colleagues to let them try your QuickNotes app.</p>
+        </div>
+        
+        <h2>Step 6: Inspect traffic (optional)</h2>
+        
+        <p>ngrok provides a web interface where you can inspect all the HTTP traffic going through your tunnel. Access it at:</p>
+        
+        <pre>http://127.0.0.1:4040</pre>
+        
+        <p>This interface shows you:</p>
+        <ul>
+            <li>All requests and responses</li>
+            <li>Headers and body content</li>
+            <li>Request timing information</li>
+            <li>Ability to replay requests</li>
+        </ul>
+        
+        <div class="image-container">
+            <img src="https://ngrok.com/static/img/inspect.png" alt="ngrok inspect interface">
+            <div class="caption">ngrok's inspection interface showing HTTP traffic</div>
+        </div>
+        
+        <h2>Important Notes</h2>
+        
+        <h3>Free tier limitations</h3>
+        <p>The free tier of ngrok has some limitations:</p>
+        <ul>
+            <li>The URL changes each time you restart ngrok</li>
+            <li>Limited number of connections</li>
+            <li>No custom domains</li>
+            <li>Sessions may expire after a few hours</li>
+        </ul>
+        
+        <h3>Security considerations</h3>
+        <div class="warning">
+            <p><strong>Warning:</strong> When you expose your app with ngrok, anyone with the URL can access it. Be careful with sensitive data and consider implementing authentication if needed.</p>
+        </div>
+        
+        <h2>Troubleshooting</h2>
+        
+        <h3>"command not found"</h3>
+        <p>If you get this error, make sure ngrok is installed and in your PATH.</p>
+        <pre>
+# Check if ngrok is in your PATH
+which ngrok
+
+# If not, you may need to specify the full path
+/path/to/ngrok http 3000</pre>
+        
+        <h3>"failed to start tunnel"</h3>
+        <p>This usually means the port is already in use. Make sure:</p>
+        <ul>
+            <li>Your QuickNotes server is running on port 3000</li>
+            <li>No other service is using port 3000</li>
+            <li>You're not running multiple instances of ngrok</li>
+        </ul>
+        
+        <h3>"ERR_NGROK_..." errors</h3>
+        <p>These are specific ngrok errors. Check the <a href="https://ngrok.com/docs" target="_blank">ngrok documentation</a> or run <code>ngrok http --help</code> for more information.</p>
+        
+        <h2>Advanced ngrok Options</h2>
+        
+        <h3>Custom subdomain (paid plans only)</h3>
+        <pre>ngrok http --subdomain=quicknotes 3000</pre>
+        
+        <h3>Password protection</h3>
+        <pre>ngrok http --auth="username:password" 3000</pre>
+        
+        <h3>Custom region</h3>
+        <pre>ngrok http --region=eu 3000</pre>
+        
+        <p>Ready to share your QuickNotes app with the world? Start your server, fire up ngrok, and share the URL!</p>
+        
+        <a href="index.html" class="btn">Back to QuickNotes</a>
+    </div>
+</body>
+</html>

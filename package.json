@@ -1,0 +1,21 @@
+{
+  "name": "quicknotes",
+  "version": "1.0.0",
+  "description": "A minimal note-taking application",
+  "main": "network-server.js",
+  "scripts": {
+    "start": "node network-server.js",
+    "ngrok": "ngrok http 3000",
+    "mock-ngrok": "node mock-ngrok.js"
+  },
+  "keywords": [
+    "notes",
+    "localStorage",
+    "javascript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}

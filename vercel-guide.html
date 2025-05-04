@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNotes - Vercel Deployment Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #4a6fa5;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .note {
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tip {
+            background-color: #ddffdd;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #3a5a8c;
+        }
+        
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        
+        .step {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deploying QuickNotes to Vercel</h1>
+        
+        <div class="note">
+            <p><strong>Note:</strong> This guide will walk you through deploying your QuickNotes application to Vercel, making it accessible online to anyone.</p>
+        </div>
+        
+        <h2>What is Vercel?</h2>
+        
+        <p>Vercel is a cloud platform for static sites and serverless functions that enables developers to host websites and web services that deploy instantly and scale automatically – all without any configuration.</p>
+        
+        <div class="image-container">
+            <img src="https://vercel.com/docs-proxy/static/docs/concepts/images/preview-deployment.png" alt="Vercel deployment flow">
+            <div class="caption">Vercel's deployment workflow</div>
+        </div>
+        
+        <h2>Why Deploy QuickNotes to Vercel?</h2>
+        
+        <ul>
+            <li><strong>Free hosting</strong> - Vercel offers a generous free tier</li>
+            <li><strong>Global CDN</strong> - Your app will be fast for users worldwide</li>
+            <li><strong>HTTPS by default</strong> - Secure connections for all users</li>
+            <li><strong>Continuous deployment</strong> - Updates automatically when you push changes</li>
+            <li><strong>Custom domains</strong> - Use your own domain name if desired</li>
+        </ul>
+        
+        <h2>Step-by-Step Deployment Guide</h2>
+        
+        <div class="step">
+            <h3><span class="step-number">1</span> Sign up for Vercel</h3>
+            <p>Go to <a href="https://vercel.com" target="_blank">vercel.com</a> and sign up for an account. You can sign up using GitHub, GitLab, or Bitbucket.</p>
+            <div class="image-container">
+                <img src="https://vercel.com/docs-proxy/static/docs/get-started/images/sign-up.png" alt="Vercel sign up page">
+                <div class="caption">Vercel sign up page</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">2</span> Create a Git Repository</h3>
+            <p>Push your QuickNotes project to a Git repository on GitHub, GitLab, or Bitbucket:</p>
+            <pre>
+# Navigate to your QuickNotes directory
+cd MiniJobb/QuickNotes
+
+# Initialize a new Git repository
+git init
+
+# Add all files
+git add .
+
+# Commit the files
+git commit -m "Initial commit"
+
+# Add your remote repository URL
+git remote add origin &lt;your-repository-url&gt;
+
+# Push to the repository
+git push -u origin main</pre>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">3</span> Import Your Repository</h3>
+            <p>In the Vercel dashboard, click "New Project" and select your repository:</p>
+            <div class="image-container">
+                <img src="https://vercel.com/docs-proxy/static/docs/get-started/images/import-git-repository.png" alt="Import Git repository">
+                <div class="caption">Importing a Git repository in Vercel</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">4</span> Configure Your Project</h3>
+            <p>Configure your project settings:</p>
+            <ul>
+                <li><strong>Framework Preset</strong>: Select "Other"</li>
+                <li><strong>Root Directory</strong>: Leave as "." (or specify the path if QuickNotes is in a subdirectory)</li>
+                <li><strong>Build Command</strong>: Leave empty</li>
+                <li><strong>Output Directory</strong>: Leave empty</li>
+            </ul>
+            <div class="image-container">
+                <img src="https://vercel.com/docs-proxy/static/docs/deployments/images/deploy-configuration.png" alt="Project configuration">
+                <div class="caption">Configuring project settings</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">5</span> Deploy</h3>
+            <p>Click the "Deploy" button and wait for the deployment to complete:</p>
+            <div class="image-container">
+                <img src="https://vercel.com/docs-proxy/static/docs/deployments/images/deployment-complete.png" alt="Deployment complete">
+                <div class="caption">Successful deployment</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">6</span> Access Your Deployed App</h3>
+            <p>Once deployment is complete, you'll get a URL where your app is hosted (e.g., <code>https://quicknotes-abc123.vercel.app</code>).</p>
+            <p>Click "Visit" to see your live QuickNotes application!</p>
+        </div>
+        
+        <h2>Managing Your Deployment</h2>
+        
+        <h3>Updating Your App</h3>
+        <p>To update your app, simply push changes to your Git repository. Vercel will automatically deploy the updates:</p>
+        <pre>
+# Make changes to your files
+git add .
+git commit -m "Update app"
+git push</pre>
+        
+        <h3>Adding a Custom Domain</h3>
+        <p>To use your own domain name:</p>
+        <ol>
+            <li>Go to your project in the Vercel dashboard</li>
+            <li>Click "Settings" > "Domains"</li>
+            <li>Add your domain and follow the instructions</li>
+        </ol>
+        
+        <h3>Viewing Analytics</h3>
+        <p>Vercel provides analytics for your deployed app:</p>
+        <ol>
+            <li>Go to your project in the Vercel dashboard</li>
+            <li>Click "Analytics" to see visitor statistics and performance data</li>
+        </ol>
+        
+        <div class="warning">
+            <p><strong>Important Note:</strong> Since QuickNotes uses localStorage for data storage, each user's notes will be stored in their own browser. Notes created on one device won't be accessible from another device.</p>
+        </div>
+        
+        <h2>Troubleshooting</h2>
+        
+        <h3>Deployment Failed</h3>
+        <p>If your deployment fails:</p>
+        <ol>
+            <li>Check the build logs in the Vercel dashboard</li>
+            <li>Make sure all file paths in your HTML, CSS, and JavaScript files are relative</li>
+            <li>Verify that your <code>vercel.json</code> configuration is correct</li>
+        </ol>
+        
+        <h3>Assets Not Loading</h3>
+        <p>If images or assets aren't loading:</p>
+        <ol>
+            <li>Check that the paths are correct</li>
+            <li>Make sure the files are included in your Git repository</li>
+            <li>Verify that the paths in your HTML/CSS files match the actual file structure</li>
+        </ol>
+        
+        <p>Ready to deploy your QuickNotes app to Vercel? Follow the steps above and enjoy your globally accessible note-taking application!</p>
+        
+        <a href="index.html" class="btn">Back to QuickNotes</a>
+    </div>
+</body>
+</html>

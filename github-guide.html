@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNotes - GitHub Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #4a6fa5;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .note {
+            background-color: #e7f3fe;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .tip {
+            background-color: #ddffdd;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #3a5a8c;
+        }
+        
+        .image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        
+        .step {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background-color: #4a6fa5;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pushing QuickNotes to GitHub</h1>
+        
+        <div class="note">
+            <p><strong>Note:</strong> This guide will walk you through the process of creating a Git repository for your QuickNotes project and pushing it to GitHub.</p>
+        </div>
+        
+        <h2>Why Use GitHub?</h2>
+        
+        <ul>
+            <li><strong>Version control</strong> - Track changes to your code</li>
+            <li><strong>Backup</strong> - Keep your code safe in the cloud</li>
+            <li><strong>Collaboration</strong> - Work with others on your project</li>
+            <li><strong>Deployment</strong> - Deploy directly from GitHub to services like Vercel</li>
+            <li><strong>Showcase</strong> - Share your work with others</li>
+        </ul>
+        
+        <h2>Step-by-Step Guide</h2>
+        
+        <div class="step">
+            <h3><span class="step-number">1</span> Initialize a Git Repository</h3>
+            <p>Open a terminal and navigate to your QuickNotes directory:</p>
+            <pre>cd MiniJobb/QuickNotes
+git init</pre>
+            <p>This creates a new Git repository in your project folder.</p>
+            <div class="image-container">
+                <img src="https://docs.github.com/assets/cb-28613/images/help/repository/repo-create-global-nav-update.png" alt="GitHub new repository button">
+                <div class="caption">The terminal after initializing a Git repository</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">2</span> Add Your Files</h3>
+            <p>Add all your project files to the repository:</p>
+            <pre>git add .</pre>
+            <p>This stages all files for commit.</p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">3</span> Commit Your Files</h3>
+            <p>Commit the files with a descriptive message:</p>
+            <pre>git commit -m "Initial commit of QuickNotes project"</pre>
+            <p>This creates a snapshot of your code at this point in time.</p>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">4</span> Create a New Repository on GitHub</h3>
+            <ol>
+                <li>Go to <a href="https://github.com/new" target="_blank">github.com/new</a></li>
+                <li>Name your repository (e.g., "quicknotes")</li>
+                <li>Add an optional description</li>
+                <li>Choose whether to make it public or private</li>
+                <li><strong>Important</strong>: Do NOT initialize the repository with a README, .gitignore, or license</li>
+                <li>Click "Create repository"</li>
+            </ol>
+            <div class="image-container">
+                <img src="https://docs.github.com/assets/cb-25139/images/help/repository/create-repository-name.png" alt="Creating a new repository on GitHub">
+                <div class="caption">Creating a new repository on GitHub</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">5</span> Connect Your Local Repository to GitHub</h3>
+            <p>After creating the repository, GitHub will show you commands to push an existing repository. Run these commands:</p>
+            <pre>git remote add origin https://github.com/YOUR_USERNAME/quicknotes.git
+git push -u origin main</pre>
+            <p>Replace <code>YOUR_USERNAME</code> with your actual GitHub username.</p>
+            <div class="image-container">
+                <img src="https://docs.github.com/assets/cb-67313/images/help/repository/copy-remote-repository-url-quick-setup.png" alt="GitHub repository URL">
+                <div class="caption">GitHub showing the commands to push your repository</div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <h3><span class="step-number">6</span> Verify Your Repository</h3>
+            <p>Go to <code>https://github.com/YOUR_USERNAME/quicknotes</code> to see your code on GitHub.</p>
+            <div class="image-container">
+                <img src="https://docs.github.com/assets/cb-33207/images/help/repository/repo-overview-empty.png" alt="Repository on GitHub">
+                <div class="caption">Your repository on GitHub after pushing your code</div>
+            </div>
+        </div>
+        
+        <h2>Using the Provided Script</h2>
+        
+        <p>For convenience, a script has been provided to help you set up Git:</p>
+        <pre>./git-setup.sh</pre>
+        <p>This script will initialize the repository, add all files, and commit them. You'll still need to create the GitHub repository and add the remote manually.</p>
+        
+        <div class="warning">
+            <p><strong>Important:</strong> If you're using GitHub, you might need to use a personal access token instead of your password for authentication. See <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">GitHub's documentation</a> for details.</p>
+        </div>
+        
+        <h2>Next Steps</h2>
+        
+        <p>Now that your QuickNotes project is on GitHub, you can:</p>
+        <ul>
+            <li><strong>Deploy to Vercel</strong>: Follow the <a href="vercel-guide.html">Vercel deployment guide</a> to deploy your app</li>
+            <li><strong>Share with others</strong>: Send them the GitHub repository URL</li>
+            <li><strong>Make changes</strong>: As you update your project, commit and push the changes to keep your repository up to date</li>
+        </ul>
+        
+        <a href="index.html" class="btn">Back to QuickNotes</a>
+    </div>
+</body>
+</html>
