@@ -19,10 +19,12 @@ app.use(morgan('dev'));
 // Import routes
 const noteRoutes = require('./routes/noteRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Mount routes
 app.use('/api/notes', noteRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Health check endpoint for Render
 app.get('/api/health', (req, res) => {

@@ -53,12 +53,57 @@ async function apiRequest(url, method = 'GET', data = null) {
 const authAPI = {
     // Register a new user
     register: (userData) => {
-        return apiRequest('/users/register', 'POST', userData);
+        return apiRequest('/auth/register', 'POST', userData);
     },
 
     // Login a user
     login: (credentials) => {
-        return apiRequest('/users/login', 'POST', credentials);
+        return apiRequest('/auth/login', 'POST', credentials);
+    },
+
+    // Refresh access token
+    refreshToken: (refreshToken) => {
+        return apiRequest('/auth/refresh-token', 'POST', { refreshToken });
+    },
+
+    // Logout user
+    logout: (refreshToken) => {
+        return apiRequest('/auth/logout', 'POST', { refreshToken });
+    },
+
+    // Verify email
+    verifyEmail: (token) => {
+        return apiRequest(`/auth/verify-email/${token}`, 'GET');
+    },
+
+    // Resend verification email
+    resendVerification: () => {
+        return apiRequest('/auth/resend-verification', 'POST');
+    },
+
+    // Forgot password
+    forgotPassword: (email) => {
+        return apiRequest('/auth/forgot-password', 'POST', { email });
+    },
+
+    // Reset password
+    resetPassword: (token, password) => {
+        return apiRequest(`/auth/reset-password/${token}`, 'POST', { password });
+    },
+
+    // Setup two-factor authentication
+    setupTwoFactor: () => {
+        return apiRequest('/auth/setup-2fa', 'POST');
+    },
+
+    // Verify and enable two-factor authentication
+    verifyTwoFactor: (token) => {
+        return apiRequest('/auth/verify-2fa', 'POST', { token });
+    },
+
+    // Disable two-factor authentication
+    disableTwoFactor: (password) => {
+        return apiRequest('/auth/disable-2fa', 'POST', { password });
     },
 
     // Get user profile

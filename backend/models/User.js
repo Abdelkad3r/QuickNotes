@@ -74,6 +74,36 @@ const UserSchema = new mongoose.Schema({
     minlength: [6, 'Password must be at least 6 characters long'],
     select: false
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  twoFactorAuth: {
+    enabled: {
+      type: Boolean,
+      default: false
+    },
+    secret: {
+      type: String,
+      select: false
+    },
+    backupCodes: {
+      type: [String],
+      select: false
+    }
+  },
+  oauthProfiles: [{
+    provider: {
+      type: String,
+      enum: ['google', 'github', 'facebook']
+    },
+    providerId: {
+      type: String
+    },
+    data: {
+      type: Object
+    }
+  }],
   preferences: {
     type: PreferencesSchema,
     default: () => ({})
@@ -85,11 +115,19 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String
   },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
+  },
   createdAt: {
     type: Date,
     default: Date.now
   },
   lastLogin: {
+    type: Date
+  },
+  passwordChangedAt: {
     type: Date
   }
 });
@@ -108,5 +146,29 @@ UserSchema.pre('save', async function(next) {
 UserSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+// Check if password was changed after token was issued
+UserSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+  return false;
+};
+
+// Set passwordChangedAt field when password is modified
+UserSchema.pre('save', function(next) {
+  if (!this.isModified('password') || this.isNew) {
+    return next();
+  }
+
+  // Set passwordChangedAt to current time minus 1 second
+  // This ensures the token is created after the password has been changed
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
 
 module.exports = mongoose.model('User', UserSchema);
