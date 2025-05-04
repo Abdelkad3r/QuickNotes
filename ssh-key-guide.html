@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix SSH Key Issues for GitHub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+        }
+        .step {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .command {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+        .note {
+            background-color: #ffe6cc;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fixing SSH Key Issues for GitHub</h1>
+    
+    <div class="error">
+        <h3>The Error You're Seeing</h3>
+        <p>If you're seeing this error:</p>
+        <div class="command">
+            load pubkey "/Users/apple/.ssh/id_rsa": invalid format
+        </div>
+        <p>It means your existing SSH key is in an incorrect format or is corrupted. Let's create a new SSH key to fix this.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 1: Generate a New SSH Key</h2>
+        <p>Open Terminal and run the following command (replace with your GitHub email):</p>
+        <div class="command">
+            ssh-keygen -t ed25519 -C "your_email@example.com"
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>When prompted:</p>
+        <ul>
+            <li>For file location: Press Enter to accept the default location</li>
+            <li>For passphrase: You can either enter a secure passphrase or press Enter twice for no passphrase</li>
+        </ul>
+        <p>This will generate a new SSH key pair using the ED25519 algorithm, which is more secure and compatible with GitHub.</p>
+    </div>
+    
+    <div class="step">
+        <h2>Step 2: Start the SSH Agent</h2>
+        <p>Start the SSH agent in the background:</p>
+        <div class="command">
+            eval "$(ssh-agent -s)"
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>You should see output like <code>Agent pid 12345</code></p>
+        
+        <p>Add your new SSH key to the agent:</p>
+        <div class="command">
+            ssh-add ~/.ssh/id_ed25519
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 3: Add the SSH Key to Your GitHub Account</h2>
+        <p>Copy your public key to the clipboard:</p>
+        <div class="command">
+            cat ~/.ssh/id_ed25519.pub | pbcopy
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>This command automatically copies the key to your clipboard on macOS.</p>
+        
+        <p>Go to GitHub:</p>
+        <ol>
+            <li>Log in to your GitHub account</li>
+            <li>Click on your profile picture in the top-right corner</li>
+            <li>Select "Settings"</li>
+            <li>In the left sidebar, click "SSH and GPG keys"</li>
+            <li>Click "New SSH key" or "Add SSH key"</li>
+            <li>Give your key a descriptive title (e.g., "MacBook Pro")</li>
+            <li>Paste your key into the "Key" field</li>
+            <li>Click "Add SSH key"</li>
+        </ol>
+    </div>
+    
+    <div class="step">
+        <h2>Step 4: Update Your Git Remote URL</h2>
+        <p>Now you need to update your repository to use SSH instead of HTTPS:</p>
+        <div class="command">
+            cd MiniJobb/QuickNotes
+            git remote set-url origin git@github.com:Abdelkad3r/QuickNotes.git
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 5: Test Your SSH Connection</h2>
+        <p>Verify that your SSH connection to GitHub is working:</p>
+        <div class="command">
+            ssh -T git@github.com
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>You might see a warning about the authenticity of the host. Type "yes" to continue.</p>
+        <p>If successful, you'll see a message like:</p>
+        <div class="command">
+            Hi Abdelkad3r! You've successfully authenticated, but GitHub does not provide shell access.
+        </div>
+    </div>
+    
+    <div class="step">
+        <h2>Step 6: Push Your Code</h2>
+        <p>Now you can push your code to GitHub:</p>
+        <div class="command">
+            git push -u origin main
+            <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+        </div>
+        <p>This should now work without asking for a password or token.</p>
+    </div>
+    
+    <div class="note">
+        <h3>Troubleshooting</h3>
+        
+        <h4>If you still see authentication errors:</h4>
+        <ol>
+            <li>Make sure you've added the SSH key to your GitHub account</li>
+            <li>Verify that you're using the SSH URL for your repository (starts with <code>git@github.com:</code>)</li>
+            <li>Check that your SSH key is added to the SSH agent:
+                <div class="command">
+                    ssh-add -l
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+            </li>
+            <li>Try running SSH in verbose mode to see more details:
+                <div class="command">
+                    ssh -vT git@github.com
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+            </li>
+        </ol>
+    </div>
+    
+    <div class="success">
+        <h3>Alternative: Using a Personal Access Token</h3>
+        <p>If you prefer to use HTTPS with a personal access token instead of SSH:</p>
+        
+        <ol>
+            <li>Create a personal access token on GitHub:
+                <ul>
+                    <li>Go to Settings > Developer settings > Personal access tokens</li>
+                    <li>Click "Generate new token"</li>
+                    <li>Give it a name, set expiration, and select the "repo" scope</li>
+                    <li>Click "Generate token" and copy the token</li>
+                </ul>
+            </li>
+            <li>Use the token in your remote URL:
+                <div class="command">
+                    git remote set-url origin https://YOUR_USERNAME:YOUR_TOKEN@github.com/Abdelkad3r/QuickNotes.git
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+                <p>Replace <code>YOUR_USERNAME</code> with your GitHub username and <code>YOUR_TOKEN</code> with your personal access token.</p>
+            </li>
+            <li>Push your code:
+                <div class="command">
+                    git push -u origin main
+                    <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+            </li>
+        </ol>
+    </div>
+    
+    <script>
+        function copyToClipboard(button) {
+            const commandDiv = button.parentElement;
+            const commandText = commandDiv.textContent.trim();
+            
+            navigator.clipboard.writeText(commandText).then(() => {
+                const originalText = button.textContent;
+                button.textContent = "Copied!";
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

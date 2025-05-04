@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickNotes - Simple Note Taking App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/favicon.png">
+</head>
+<body>
+    <!-- Authentication Container -->
+    <div id="auth-container" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fas fa-sticky-note"></i>
+                    <h1>QuickNotes</h1>
+                </div>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <h2>Login to Your Account</h2>
+                
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn primary full-width">Login</button>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden">
+                <h2>Create an Account</h2>
+                
+                <div class="form-group">
+                    <label for="register-username">Username</label>
+                    <input type="text" id="register-username" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" placeholder="Choose a password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" placeholder="Confirm your password" required>
+                </div>
+                
+                <button type="submit" class="btn primary full-width">Register</button>
+            </form>
+            
+            <div class="auth-footer">
+                <button id="auth-toggle" class="btn-link">Need an account? Register</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main App Container -->
+    <div id="app-container" class="app-container hidden">
+        <header>
+            <div class="logo">
+                <i class="fas fa-sticky-note"></i>
+                <h1>QuickNotes</h1>
+            </div>
+            <div class="header-actions">
+                <div class="user-section">
+                    <span id="sync-status" class="sync-status" title="Online status">
+                        <i class="fas fa-wifi"></i>
+                    </span>
+                    <span id="user-info" class="user-info"></span>
+                    <button id="logout-btn" class="btn-link" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search notes...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="notes-container">
+                <div class="notes-list" id="notes-list">
+                    <!-- Notes will be dynamically added here -->
+                </div>
+
+                <div class="note-editor">
+                    <div class="editor-header">
+                        <input type="text" id="note-title" placeholder="Note Title" maxlength="100">
+                        <div class="editor-actions">
+                            <button id="save-note" class="btn primary" title="Save note">
+                                <i class="fas fa-save"></i> Save
+                            </button>
+                            <button id="clear-note" class="btn secondary" title="Clear editor">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="note-content" placeholder="Write your note here..."></textarea>
+                    <div class="editor-footer">
+                        <div class="note-info">
+                            <span id="char-count">0 characters</span>
+                        </div>
+                        <div class="export-actions">
+                            <button id="export-note" class="btn secondary" title="Export as text file">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="notification" class="notification">
+            <span id="notification-message"></span>
+        </div>
+
+        <div id="confirm-dialog" class="dialog">
+            <div class="dialog-content">
+                <h3>Confirm Delete</h3>
+                <p>Are you sure you want to delete this note? This action cannot be undone.</p>
+                <div class="dialog-actions">
+                    <button id="confirm-delete" class="btn danger">Delete</button>
+                    <button id="cancel-delete" class="btn secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app-with-backend.js"></script>
+</body>
+</html>

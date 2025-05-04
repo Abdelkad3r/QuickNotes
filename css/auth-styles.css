@@ -1,0 +1,129 @@
+/* Authentication Styles for QuickNotes */
+
+/* Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-box {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-color);
+}
+
+.auth-header .logo i {
+    font-size: 2rem;
+}
+
+.auth-header .logo h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Auth Forms */
+.auth-form {
+    margin-bottom: 20px;
+}
+
+.auth-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    transition: color var(--transition-speed);
+}
+
+.btn-link:hover {
+    color: var(--primary-hover);
+}
+
+/* User Section in Header */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.sync-status {
+    color: var(--success-color);
+    font-size: 0.9rem;
+}
+
+.sync-status.offline {
+    color: var(--danger-color);
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
